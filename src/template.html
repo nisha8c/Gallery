@@ -6,5 +6,30 @@
 
   <body>
     <div id="root"></div>
+
+    <main>
+      <div class="container">
+        <h1 class="h1">Unsplash Photo Search</h1>
+        <form class="js-form">
+          <input type="text" class="search-input js-search-input" placeholder="Search high quality photos from Unsplash" autofocus>
+          <button type="submit" class="btn">Go</button>
+        </form>
+
+        <div class="result-stats js-result-stats"></div>
+
+        <div class="search-results js-search-results"></div>
+        <div class="pagination">
+          <button class="hidden prev-btn js-prev"><a href="#top" style="text-decoration: none; color: white;">Previous page</a></button>
+          <button class="hidden next-btn js-next"><a href="#top" style="text-decoration: none; color: white;">Next page</a></button>
+        </div>
+      </div>
+
+      <div class="spinner js-spinner hidden">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+      </div>
+    </main>
+
+    
   </body>
 </html>
