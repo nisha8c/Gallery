@@ -104,3 +104,19 @@ prevBtn.addEventListener('click', () => {
 });
 
 form.addEventListener('submit', handleSubmit);
+
+// Use HTML5 Local Storage to store and read saved searches.:-------------------
+localStorage.setItem('myKey', 'myValue');
+window.addEventListener('storage', event => {
+  console.log(`The value for ${event.key} was changed from${event.oldValue} to ${event.newValue}`);
+}, false);
+
+// Check for HTML5 Storage..
+function supportsHtml5Storage() {
+  try {
+    return 'localStorage' in window && window.localStorage !== null;
+  } catch (e) {
+    return false;
+  }
+}
+supportsHtml5Storage();
