@@ -38,7 +38,7 @@ body {
   width: 60px;
   height: 30px;
   color: white;
-  background: #ff0000;
+  background: black;
   border: none;
 }
 
@@ -103,15 +103,15 @@ button:focus {
   margin-left: 10px;
 }
 
-.footer {
-  text-align: center;
-  font-size: 1.7em;
-  position: fixed;
-  background: white;
-  padding: 10px;
-  bottom: 0;
-  width:100%;
-}
+// .footer {
+//   text-align: center;
+//   font-size: 1.7em;
+//   position: fixed;
+//   background: white;
+//   padding: 10px;
+//   bottom: 0;
+//   width:100%;
+// }
 
 .github-link {
   color: #ff0000;
@@ -173,5 +173,9 @@ footer {
 
 footer img {
   width: 50px;
+}
+
+.recent-list {
+
 }
 
