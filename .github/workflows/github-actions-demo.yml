@@ -1,4 +1,4 @@
-name: CICD Gallery package
+name: Go package
 
 on: [push]
 
