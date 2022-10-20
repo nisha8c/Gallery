@@ -6,6 +6,7 @@
     "babel-loader": "^8.2.5",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.1",
+    "dotenv-webpack": "^8.0.1",
     "eslint-config-salt": "^1.2.0",
     "html-webpack-plugin": "^5.5.0",
     "jest": "^29.2.1",

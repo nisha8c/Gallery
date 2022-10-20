@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const webpack = require('webpack');
+const Dotenv = require('dotenv-webpack');
 
 
 module.exports = {
@@ -22,6 +23,7 @@ module.exports = {
     filename: '[name].bundle.js',
   },
   plugins: [
+    new Dotenv(),
     new HtmlWebpackPlugin({
       title: 'webpack Boilerplate',
       template: path.resolve(__dirname, './src/template.html'), // template file
