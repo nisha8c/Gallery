@@ -16,9 +16,8 @@ const render = (htmlString, el) => {
 };
 
 const update = newState => {
-  console.log('Updating State....');
   state = { ...state, ...newState };
-  console.log('state::::::  ', state);
+  console.log('State: ', state);
   window.dispatchEvent(new Event('statechange'));
 };
 
@@ -34,7 +33,7 @@ let searchQuery;
 
 const apiKey = process.env.API_KEY;
 
-function pagination(totalPages) {
+const pagination = totalPages => {
   nextBtn.classList.remove('hidden');
   if (currentPage >= totalPages) {
     nextBtn.classList.add('hidden');
@@ -44,7 +43,7 @@ function pagination(totalPages) {
   if (currentPage !== 1) {
     prevBtn.classList.remove('hidden');
   }
-}
+};
 
 async function searchUnsplash(searchQry) {
   const endpoint = `https://api.unsplash.com/search/photos?query=${searchQry}&per_page=30&page=${currentPage}&client_id=${apiKey}`;
@@ -56,7 +55,7 @@ async function searchUnsplash(searchQry) {
   return json;
 }
 
-function displayResults(json) {
+const displayResults = json => {
   const searchResults = document.querySelector('.search-results');
   searchResults.textContent = '';
   json.results.forEach(result => {
@@ -78,30 +77,27 @@ function displayResults(json) {
   });
   totalResults = json.total;
   resultStats.textContent = `About ${totalResults} results found`;
-}
+};
 
 async function fetchResults(srchQuery) {
   spinner.classList.remove('hidden');
   try {
     const results = await searchUnsplash(srchQuery);
-    console.log('results.total_pages::: ', results.total_pages);
     pagination(results.total_pages);
-    console.log('results::: ', results);
     displayResults(results);
   } catch (err) {
-    console.log('Erroor:: ', err);
+    console.log('Error:: ', err);
   }
   spinner.classList.add('hidden');
 }
 
-function handleSubmit(event) {
+const handleSubmit = event => {
   event.preventDefault();
   currentPage = 1;
   const inputValue = document.querySelector('.js-search-input').value;
   searchQuery = inputValue.trim();
-  console.log('searchQuery:: ', searchQuery);
   fetchResults(searchQuery);
-}
+};
 
 nextBtn.addEventListener('click', () => {
   currentPage += 1;
@@ -117,15 +113,15 @@ form.addEventListener('submit', handleSubmit);
 
 // -------Storage code starts
 
-function getRecentSearches() {
+const getRecentSearches = () => {
   const searches = localStorage.getItem('recentSearches');
   if (searches) {
     return JSON.parse(searches);
   }
   return [];
-}
+};
 
-function saveSearchString(str) {
+const saveSearchString = str => {
   const searches = getRecentSearches();
   if (!str || searches.indexOf(str) > -1) {
     return false;
@@ -134,26 +130,26 @@ function saveSearchString(str) {
   searches.push(str);
   localStorage.setItem('recentSearches', JSON.stringify(searches));
   return true;
-}
+};
 
-function removeSearches() {
+const removeSearches = () => {
   localStorage.removeItem('recentSearches');
-}
+};
 
 // Create an li, given string contents, append to the supplied ul
-function appendListItem(listElement, string) {
+const appendListItem = (listElement, string) => {
   const listItemElement = document.createElement('LI');
   listItemElement.innerHTML = string;
   listElement.appendChild(listItemElement);
-}
+};
 
 // Empty the contents of an element (ul)
-function clearList(listElement) {
+const clearList = listElement => {
   // eslint-disable-next-line no-param-reassign
   listElement.innerHTML = '';
-}
+};
 
-window.onload = function () {
+window.onload = () => {
   if (localStorage) {
     const searchForm = document.getElementById('searchForm');
     const searchBar = document.getElementById('searchBar');
@@ -179,6 +175,10 @@ window.onload = function () {
       clearList(recentSearchList);
     });
 
+    // searchBar.addEventListener('keyup', () => {
+    //   console.log('Key Up Event...');
+    // });
+
     // const searchTerm = document.querySelector('#searchfield').value;
     // const searchHTML = `<option value="${searchTerm}">${searchTerm}</option>`;
 
@@ -189,6 +189,5 @@ window.onload = function () {
 // -------------------------------
 
 window.addEventListener('statechange', () => {
-  console.log('State Change Event...');
   render(template(state), document.querySelector('#root'));
 });
