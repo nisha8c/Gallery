@@ -1,28 +1,13 @@
 import './styles/main.scss';
 
-let state = {
-  searchHistory: '',
-  imageUrls: '',
-};
+// Create heading node
+const heading = document.createElement('h1');
+heading.textContent = 'Interesting!';
 
-const template = inputState => `
-    <datalist id="searchHistory">${inputState.searchHistory}</datalist>
-    <div id="images">${inputState.imageUrls}</div>
-  `;
+// Append heading node to the DOM
+const app = document.querySelector('#root');
+app.append(heading);
 
-const render = (htmlString, el) => {
-  const element = el;
-  element.innerHTML = htmlString;
-};
-
-const update = newState => {
-  console.log('Updating State....');
-  state = { ...state, ...newState };
-  console.log('state::::::  ', state);
-  window.dispatchEvent(new Event('statechange'));
-};
-
-// -------------------------------
 const form = document.querySelector('.js-form');
 const nextBtn = document.querySelector('.js-next');
 const prevBtn = document.querySelector('.js-prev');
@@ -90,6 +75,7 @@ async function fetchResults(srchQuery) {
     displayResults(results);
   } catch (err) {
     console.log('Erroor:: ', err);
+    alert('Failed to search Unsplash');
   }
   spinner.classList.add('hidden');
 }
@@ -116,6 +102,14 @@ prevBtn.addEventListener('click', () => {
 form.addEventListener('submit', handleSubmit);
 
 // -------Storage code starts
+
+// function supportsLocalStorage() {
+//   try {
+//     return 'localStorage' in window && window.localStorage !== null;
+//   } catch (e) {
+//     return false;
+//   }
+// }
 
 function getRecentSearches() {
   const searches = localStorage.getItem('recentSearches');
@@ -178,17 +172,7 @@ window.onload = function () {
       removeSearches();
       clearList(recentSearchList);
     });
-
-    // const searchTerm = document.querySelector('#searchfield').value;
-    // const searchHTML = `<option value="${searchTerm}">${searchTerm}</option>`;
-
-    update({ searchHistory: recentSearchList.textContent });
   }
 };
 
-// -------------------------------
-
-window.addEventListener('statechange', () => {
-  console.log('State Change Event...');
-  render(template(state), document.querySelector('#root'));
-});
+// -- try state changes way
