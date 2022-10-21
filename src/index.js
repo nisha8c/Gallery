@@ -189,5 +189,6 @@ window.onload = () => {
 // -------------------------------
 
 window.addEventListener('statechange', () => {
-  render(template(state), document.querySelector('#root'));
+  console.log('state-change detected...');
+  render(template(state), document.querySelector('.search-results'));
 });
