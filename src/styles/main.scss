@@ -78,6 +78,15 @@ button:focus {
   height: 250px;
   padding: 5px;
   border-radius: 4px;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+  position: relative;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.result-item:hover {
+  transform: rotateY(180deg);
 }
 
 .photographer-name {
